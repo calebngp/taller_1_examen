@@ -1,0 +1,166 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-match-result-heading" data-cy="MatchResultCreateUpdateHeading">Crear o editar Match Result</h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let technicalMatchRef = editForm.get('technicalMatch')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_technicalMatch">Technical Match</label>
+          <input
+            type="number"
+            class="form-control"
+            name="technicalMatch"
+            id="field_technicalMatch"
+            data-cy="technicalMatch"
+            formControlName="technicalMatch"
+          />
+          @if (technicalMatchRef.invalid && (technicalMatchRef.dirty || technicalMatchRef.touched)) {
+            <div>
+              @if (editForm.get('technicalMatch')?.errors?.required) {
+                <small class="form-text text-danger">Este campo es obligatorio.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('technicalMatch')?.errors?.number"
+                >Este campo debe ser un número.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_aiTechnicalAffinity">Ai Technical Affinity</label>
+          <input
+            type="number"
+            class="form-control"
+            name="aiTechnicalAffinity"
+            id="field_aiTechnicalAffinity"
+            data-cy="aiTechnicalAffinity"
+            formControlName="aiTechnicalAffinity"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_aiMotivationalAffinity">Ai Motivational Affinity</label>
+          <input
+            type="number"
+            class="form-control"
+            name="aiMotivationalAffinity"
+            id="field_aiMotivationalAffinity"
+            data-cy="aiMotivationalAffinity"
+            formControlName="aiMotivationalAffinity"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_aiExperienceRelevance">Ai Experience Relevance</label>
+          <input
+            type="number"
+            class="form-control"
+            name="aiExperienceRelevance"
+            id="field_aiExperienceRelevance"
+            data-cy="aiExperienceRelevance"
+            formControlName="aiExperienceRelevance"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_aiComment">Ai Comment</label>
+          <textarea class="form-control" name="aiComment" id="field_aiComment" data-cy="aiComment" formControlName="aiComment"></textarea>
+        </div>
+
+        @let createdAtRef = editForm.get('createdAt')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdAt">Created At</label>
+          <input type="text" class="form-control" name="createdAt" id="field_createdAt" data-cy="createdAt" formControlName="createdAt" />
+          @if (createdAtRef.invalid && (createdAtRef.dirty || createdAtRef.touched)) {
+            <div>
+              @if (editForm.get('createdAt')?.errors?.required) {
+                <small class="form-text text-danger">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('createdAt')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 50 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_project">Project</label>
+          <select
+            class="form-control"
+            id="field_project"
+            data-cy="project"
+            name="project"
+            formControlName="project"
+            [compareWith]="compareProject"
+          >
+            @if (!editForm.get('project')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (projectOption of projectsSharedCollection; track $index) {
+              <option [ngValue]="projectOption">{{ projectOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['project'])!.invalid && (editForm.get(['project'])!.dirty || editForm.get(['project'])!.touched)) {
+          <div>
+            @if (editForm.get(['project'])?.errors?.required) {
+              <small class="form-text text-danger">Este campo es obligatorio.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_developer">Developer</label>
+          <select
+            class="form-control"
+            id="field_developer"
+            data-cy="developer"
+            name="developer"
+            formControlName="developer"
+            [compareWith]="compareDeveloper"
+          >
+            @if (!editForm.get('developer')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (developerOption of developersSharedCollection; track $index) {
+              <option [ngValue]="developerOption">{{ developerOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['developer'])!.invalid && (editForm.get(['developer'])!.dirty || editForm.get(['developer'])!.touched)) {
+          <div>
+            @if (editForm.get(['developer'])?.errors?.required) {
+              <small class="form-text text-danger">Este campo es obligatorio.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

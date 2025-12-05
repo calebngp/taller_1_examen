@@ -1,0 +1,87 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (developer(); as developerRef) {
+      <div>
+        <h2 data-cy="developerDetailsHeading"><span>Developer</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ developerRef.id }}</span>
+          </dd>
+          <dt><span>Name</span></dt>
+          <dd>
+            <span>{{ developerRef.name }}</span>
+          </dd>
+          <dt><span>Email</span></dt>
+          <dd>
+            <span>{{ developerRef.email }}</span>
+          </dd>
+          <dt><span>Experience Level</span></dt>
+          <dd>
+            <span>{{ developerRef.experienceLevel }}</span>
+          </dd>
+          <dt><span>Bio</span></dt>
+          <dd>
+            <span>{{ developerRef.bio }}</span>
+          </dd>
+          <dt><span>Location</span></dt>
+          <dd>
+            <span>{{ developerRef.location }}</span>
+          </dd>
+          <dt><span>Github Profile</span></dt>
+          <dd>
+            <span>{{ developerRef.githubProfile }}</span>
+          </dd>
+          <dt><span>Linkedin</span></dt>
+          <dd>
+            <span>{{ developerRef.linkedin }}</span>
+          </dd>
+          <dt><span>Motivation</span></dt>
+          <dd>
+            <span>{{ developerRef.motivation }}</span>
+          </dd>
+          <dt><span>Usuario Creacion</span></dt>
+          <dd>
+            <span>{{ developerRef.usuarioCreacion }}</span>
+          </dd>
+          <dt><span>Usuario Modificacion</span></dt>
+          <dd>
+            <span>{{ developerRef.usuarioModificacion }}</span>
+          </dd>
+          <dt><span>Fecha Creacion</span></dt>
+          <dd>
+            <span>{{ developerRef.fechaCreacion | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Fecha Modificacion</span></dt>
+          <dd>
+            <span>{{ developerRef.fechaModificacion | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Skills</span></dt>
+          <dd>
+            @for (skills of developerRef.skills; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/technology', skills.id, 'view']">{{ skills?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/developer', developerRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

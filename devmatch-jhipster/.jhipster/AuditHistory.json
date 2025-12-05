@@ -1,0 +1,50 @@
+{
+  "annotations": {
+    "changelogDate": "20251205174700"
+  },
+  "applications": ["devmatch"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "entityType",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "entityId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "fieldName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "oldValue",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "newValue",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "usuario",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "fechaModificacion",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "AuditHistory",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

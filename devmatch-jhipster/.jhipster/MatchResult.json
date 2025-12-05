@@ -1,0 +1,56 @@
+{
+  "annotations": {
+    "changelogDate": "20251205174600"
+  },
+  "applications": ["devmatch"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "technicalMatch",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "aiTechnicalAffinity",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "aiMotivationalAffinity",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "aiExperienceRelevance",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "aiComment",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    }
+  ],
+  "name": "MatchResult",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "project",
+      "relationshipName": "project",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "developer",
+      "relationshipName": "developer",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

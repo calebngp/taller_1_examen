@@ -1,0 +1,151 @@
+// ============================================================
+// DevMatch AI - Modelo de Entidades JDL
+// Sistema de Matching entre Desarrolladores y Proyectos
+// ============================================================
+
+application {
+  config {
+    baseName devmatch
+    applicationType monolith
+    packageName com.devmatch
+    databaseType sql
+    devDatabaseType h2Disk
+    prodDatabaseType postgresql
+    cacheProvider no
+    enableHibernateCache false
+    enableSwaggerCodegen false
+    enableTranslation false
+    nativeLanguage es
+    jhiPrefix jhi
+    serverPort 8080
+    buildTool maven
+    clientFramework angular
+    clientPackageManager npm
+    testFrameworks []
+    enableGradleEnterprise false
+    jhipsterVersion "8.0.0"
+  }
+  
+  entities *
+}
+
+// ============================================================
+// ENTIDAD: Technology
+// Representa las tecnologías/habilidades del sistema
+// ============================================================
+entity Technology {
+  name String required unique maxlength(100)
+  category String maxlength(50)
+}
+
+// ============================================================
+// ENTIDAD: Developer
+// Representa los desarrolladores registrados en el sistema
+// ============================================================
+entity Developer {
+  name String required maxlength(200)
+  email String unique maxlength(200)
+  experienceLevel String maxlength(50)
+  bio TextBlob
+  location String maxlength(200)
+  githubProfile String maxlength(500)
+  linkedin String maxlength(500)
+  motivation TextBlob
+  usuarioCreacion String maxlength(100)
+  usuarioModificacion String maxlength(100)
+  fechaCreacion Instant
+  fechaModificacion Instant
+}
+
+// ============================================================
+// ENTIDAD: Project
+// Representa los proyectos disponibles en el sistema
+// ============================================================
+entity Project {
+  name String required maxlength(200)
+  description TextBlob required
+  experienceLevel String required maxlength(50)
+  projectType String required maxlength(50)
+  status String maxlength(50)
+  usuarioCreacion String maxlength(100)
+  usuarioModificacion String maxlength(100)
+  fechaCreacion Instant
+  fechaModificacion Instant
+}
+
+// ============================================================
+// ENTIDAD: Experience
+// Representa las experiencias de los desarrolladores
+// ============================================================
+entity Experience {
+  description TextBlob required
+  category String maxlength(100)
+}
+
+// ============================================================
+// ENTIDAD: MatchResult
+// Representa los resultados de matching entre proyectos y desarrolladores
+// ============================================================
+entity MatchResult {
+  technicalMatch BigDecimal required
+  aiTechnicalAffinity Integer
+  aiMotivationalAffinity Integer
+  aiExperienceRelevance Integer
+  aiComment TextBlob
+  createdAt String required maxlength(50)
+}
+
+// ============================================================
+// ENTIDAD: AuditHistory
+// Representa el historial de auditoría de cambios
+// ============================================================
+entity AuditHistory {
+  entityType String required maxlength(50)
+  entityId Long required
+  fieldName String required maxlength(100)
+  oldValue TextBlob
+  newValue TextBlob
+  usuario String required maxlength(100)
+  fechaModificacion Instant required
+}
+
+// ============================================================
+// RELACIONES ENTRE ENTIDADES
+// ============================================================
+
+// Relación Many-to-Many: Developer <-> Technology (Skills)
+relationship ManyToMany {
+  Developer{skills} to Technology{developers}
+}
+
+// Relación Many-to-Many: Project <-> Technology (Required Technologies)
+relationship ManyToMany {
+  Project{requiredTechnologies} to Technology{projects}
+}
+
+// Relación One-to-Many: Developer -> Experience
+relationship OneToMany {
+  Developer{experiences} to Experience{developer required}
+}
+
+// Relación Many-to-One: MatchResult -> Project
+relationship ManyToOne {
+  MatchResult{project required} to Project
+}
+
+// Relación Many-to-One: MatchResult -> Developer
+relationship ManyToOne {
+  MatchResult{developer required} to Developer
+}
+
+// ============================================================
+// OPCIONES DE PAGINACIÓN Y BÚSQUEDA
+// ============================================================
+paginate Developer, Project, Technology, Experience, MatchResult, AuditHistory with pagination
+service Developer, Project, Technology, Experience, MatchResult, AuditHistory with serviceClass
+dto Developer, Project, Technology, Experience, MatchResult, AuditHistory with mapstruct
+
+// ============================================================
+// FIN DEL MODELO JDL
+// ============================================================
+

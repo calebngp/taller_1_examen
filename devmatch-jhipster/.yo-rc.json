@@ -1,0 +1,28 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "baseName": "devmatch",
+    "buildTool": "maven",
+    "cacheProvider": "no",
+    "clientFramework": "angular",
+    "clientPackageManager": "npm",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "enableGradleEnterprise": false,
+    "enableHibernateCache": false,
+    "enableSwaggerCodegen": false,
+    "enableTranslation": false,
+    "entities": ["Technology", "Developer", "Project", "Experience", "MatchResult", "AuditHistory"],
+    "jhiPrefix": "jhi",
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "MWZhZTg3OGM0MWE3MzczZWQ0YjU2Njk0YmFhYzYyODJkYWU0NTc3OGY2MGUxODc4ZjkyNDFkZjkzNTFjMjFmZmMxZjVkOGQ0MjYwMDI0NDZhZTdhYjQzMTUyYmQ3MmZjNjllMGYyNzI2ZjA3YzZhNTgzNGFjNDc4YzJmYWY4MDI=",
+    "lastLiquibaseTimestamp": 1764956820000,
+    "monorepository": true,
+    "nativeLanguage": "es",
+    "packageName": "com.devmatch",
+    "prodDatabaseType": "postgresql",
+    "serverPort": "8080",
+    "skipCommitHook": true,
+    "testFrameworks": []
+  }
+}

@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (auditHistory(); as auditHistoryRef) {
+      <div>
+        <h2 data-cy="auditHistoryDetailsHeading"><span>Audit History</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ auditHistoryRef.id }}</span>
+          </dd>
+          <dt><span>Entity Type</span></dt>
+          <dd>
+            <span>{{ auditHistoryRef.entityType }}</span>
+          </dd>
+          <dt><span>Entity Id</span></dt>
+          <dd>
+            <span>{{ auditHistoryRef.entityId }}</span>
+          </dd>
+          <dt><span>Field Name</span></dt>
+          <dd>
+            <span>{{ auditHistoryRef.fieldName }}</span>
+          </dd>
+          <dt><span>Old Value</span></dt>
+          <dd>
+            <span>{{ auditHistoryRef.oldValue }}</span>
+          </dd>
+          <dt><span>New Value</span></dt>
+          <dd>
+            <span>{{ auditHistoryRef.newValue }}</span>
+          </dd>
+          <dt><span>Usuario</span></dt>
+          <dd>
+            <span>{{ auditHistoryRef.usuario }}</span>
+          </dd>
+          <dt><span>Fecha Modificacion</span></dt>
+          <dd>
+            <span>{{ auditHistoryRef.fechaModificacion | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/audit-history', auditHistoryRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

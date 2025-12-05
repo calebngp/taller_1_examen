@@ -1,0 +1,232 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-developer-heading" data-cy="DeveloperCreateUpdateHeading">Crear o editar Developer</h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let nameRef = editForm.get('name')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          @if (nameRef.invalid && (nameRef.dirty || nameRef.touched)) {
+            <div>
+              @if (editForm.get('name')?.errors?.required) {
+                <small class="form-text text-danger">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('name')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 200 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let emailRef = editForm.get('email')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          @if (emailRef.invalid && (emailRef.dirty || emailRef.touched)) {
+            <div>
+              @if (editForm.get('email')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 200 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let experienceLevelRef = editForm.get('experienceLevel')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_experienceLevel">Experience Level</label>
+          <input
+            type="text"
+            class="form-control"
+            name="experienceLevel"
+            id="field_experienceLevel"
+            data-cy="experienceLevel"
+            formControlName="experienceLevel"
+          />
+          @if (experienceLevelRef.invalid && (experienceLevelRef.dirty || experienceLevelRef.touched)) {
+            <div>
+              @if (editForm.get('experienceLevel')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 50 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_bio">Bio</label>
+          <textarea class="form-control" name="bio" id="field_bio" data-cy="bio" formControlName="bio"></textarea>
+        </div>
+
+        @let locationRef = editForm.get('location')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_location">Location</label>
+          <input type="text" class="form-control" name="location" id="field_location" data-cy="location" formControlName="location" />
+          @if (locationRef.invalid && (locationRef.dirty || locationRef.touched)) {
+            <div>
+              @if (editForm.get('location')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 200 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let githubProfileRef = editForm.get('githubProfile')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_githubProfile">Github Profile</label>
+          <input
+            type="text"
+            class="form-control"
+            name="githubProfile"
+            id="field_githubProfile"
+            data-cy="githubProfile"
+            formControlName="githubProfile"
+          />
+          @if (githubProfileRef.invalid && (githubProfileRef.dirty || githubProfileRef.touched)) {
+            <div>
+              @if (editForm.get('githubProfile')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 500 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let linkedinRef = editForm.get('linkedin')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_linkedin">Linkedin</label>
+          <input type="text" class="form-control" name="linkedin" id="field_linkedin" data-cy="linkedin" formControlName="linkedin" />
+          @if (linkedinRef.invalid && (linkedinRef.dirty || linkedinRef.touched)) {
+            <div>
+              @if (editForm.get('linkedin')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 500 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_motivation">Motivation</label>
+          <textarea
+            class="form-control"
+            name="motivation"
+            id="field_motivation"
+            data-cy="motivation"
+            formControlName="motivation"
+          ></textarea>
+        </div>
+
+        @let usuarioCreacionRef = editForm.get('usuarioCreacion')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_usuarioCreacion">Usuario Creacion</label>
+          <input
+            type="text"
+            class="form-control"
+            name="usuarioCreacion"
+            id="field_usuarioCreacion"
+            data-cy="usuarioCreacion"
+            formControlName="usuarioCreacion"
+          />
+          @if (usuarioCreacionRef.invalid && (usuarioCreacionRef.dirty || usuarioCreacionRef.touched)) {
+            <div>
+              @if (editForm.get('usuarioCreacion')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 100 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let usuarioModificacionRef = editForm.get('usuarioModificacion')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_usuarioModificacion">Usuario Modificacion</label>
+          <input
+            type="text"
+            class="form-control"
+            name="usuarioModificacion"
+            id="field_usuarioModificacion"
+            data-cy="usuarioModificacion"
+            formControlName="usuarioModificacion"
+          />
+          @if (usuarioModificacionRef.invalid && (usuarioModificacionRef.dirty || usuarioModificacionRef.touched)) {
+            <div>
+              @if (editForm.get('usuarioModificacion')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 100 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fechaCreacion">Fecha Creacion</label>
+          <div class="d-flex">
+            <input
+              id="field_fechaCreacion"
+              data-cy="fechaCreacion"
+              type="datetime-local"
+              class="form-control"
+              name="fechaCreacion"
+              formControlName="fechaCreacion"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fechaModificacion">Fecha Modificacion</label>
+          <div class="d-flex">
+            <input
+              id="field_fechaModificacion"
+              data-cy="fechaModificacion"
+              type="datetime-local"
+              class="form-control"
+              name="fechaModificacion"
+              formControlName="fechaModificacion"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="field_skills">Skills</label>
+          <select
+            class="form-control"
+            id="field_skills"
+            data-cy="skills"
+            multiple
+            name="skills"
+            formControlName="skills"
+            [compareWith]="compareTechnology"
+          >
+            @for (technologyOption of technologiesSharedCollection; track $index) {
+              <option [ngValue]="technologyOption">{{ technologyOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

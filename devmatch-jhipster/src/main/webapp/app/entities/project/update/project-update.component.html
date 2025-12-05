@@ -1,0 +1,215 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-project-heading" data-cy="ProjectCreateUpdateHeading">Crear o editar Project</h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let nameRef = editForm.get('name')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          @if (nameRef.invalid && (nameRef.dirty || nameRef.touched)) {
+            <div>
+              @if (editForm.get('name')?.errors?.required) {
+                <small class="form-text text-danger">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('name')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 200 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let descriptionRef = editForm.get('description')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_description">Description</label>
+          <textarea
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          ></textarea>
+          @if (descriptionRef.invalid && (descriptionRef.dirty || descriptionRef.touched)) {
+            <div>
+              @if (editForm.get('description')?.errors?.required) {
+                <small class="form-text text-danger">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let experienceLevelRef = editForm.get('experienceLevel')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_experienceLevel">Experience Level</label>
+          <input
+            type="text"
+            class="form-control"
+            name="experienceLevel"
+            id="field_experienceLevel"
+            data-cy="experienceLevel"
+            formControlName="experienceLevel"
+          />
+          @if (experienceLevelRef.invalid && (experienceLevelRef.dirty || experienceLevelRef.touched)) {
+            <div>
+              @if (editForm.get('experienceLevel')?.errors?.required) {
+                <small class="form-text text-danger">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('experienceLevel')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 50 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let projectTypeRef = editForm.get('projectType')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_projectType">Project Type</label>
+          <input
+            type="text"
+            class="form-control"
+            name="projectType"
+            id="field_projectType"
+            data-cy="projectType"
+            formControlName="projectType"
+          />
+          @if (projectTypeRef.invalid && (projectTypeRef.dirty || projectTypeRef.touched)) {
+            <div>
+              @if (editForm.get('projectType')?.errors?.required) {
+                <small class="form-text text-danger">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('projectType')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 50 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let statusRef = editForm.get('status')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+          @if (statusRef.invalid && (statusRef.dirty || statusRef.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 50 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let usuarioCreacionRef = editForm.get('usuarioCreacion')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_usuarioCreacion">Usuario Creacion</label>
+          <input
+            type="text"
+            class="form-control"
+            name="usuarioCreacion"
+            id="field_usuarioCreacion"
+            data-cy="usuarioCreacion"
+            formControlName="usuarioCreacion"
+          />
+          @if (usuarioCreacionRef.invalid && (usuarioCreacionRef.dirty || usuarioCreacionRef.touched)) {
+            <div>
+              @if (editForm.get('usuarioCreacion')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 100 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let usuarioModificacionRef = editForm.get('usuarioModificacion')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_usuarioModificacion">Usuario Modificacion</label>
+          <input
+            type="text"
+            class="form-control"
+            name="usuarioModificacion"
+            id="field_usuarioModificacion"
+            data-cy="usuarioModificacion"
+            formControlName="usuarioModificacion"
+          />
+          @if (usuarioModificacionRef.invalid && (usuarioModificacionRef.dirty || usuarioModificacionRef.touched)) {
+            <div>
+              @if (editForm.get('usuarioModificacion')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 100 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fechaCreacion">Fecha Creacion</label>
+          <div class="d-flex">
+            <input
+              id="field_fechaCreacion"
+              data-cy="fechaCreacion"
+              type="datetime-local"
+              class="form-control"
+              name="fechaCreacion"
+              formControlName="fechaCreacion"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fechaModificacion">Fecha Modificacion</label>
+          <div class="d-flex">
+            <input
+              id="field_fechaModificacion"
+              data-cy="fechaModificacion"
+              type="datetime-local"
+              class="form-control"
+              name="fechaModificacion"
+              formControlName="fechaModificacion"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="field_requiredTechnologies">Required Technologies</label>
+          <select
+            class="form-control"
+            id="field_requiredTechnologies"
+            data-cy="requiredTechnologies"
+            multiple
+            name="requiredTechnologies"
+            formControlName="requiredTechnologies"
+            [compareWith]="compareTechnology"
+          >
+            @for (technologyOption of technologiesSharedCollection; track $index) {
+              <option [ngValue]="technologyOption">{{ technologyOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

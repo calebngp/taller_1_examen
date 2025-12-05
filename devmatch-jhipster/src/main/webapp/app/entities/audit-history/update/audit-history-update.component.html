@@ -1,0 +1,141 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-audit-history-heading" data-cy="AuditHistoryCreateUpdateHeading">Crear o editar Audit History</h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let entityTypeRef = editForm.get('entityType')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_entityType">Entity Type</label>
+          <input
+            type="text"
+            class="form-control"
+            name="entityType"
+            id="field_entityType"
+            data-cy="entityType"
+            formControlName="entityType"
+          />
+          @if (entityTypeRef.invalid && (entityTypeRef.dirty || entityTypeRef.touched)) {
+            <div>
+              @if (editForm.get('entityType')?.errors?.required) {
+                <small class="form-text text-danger">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('entityType')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 50 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let entityIdRef = editForm.get('entityId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_entityId">Entity Id</label>
+          <input type="number" class="form-control" name="entityId" id="field_entityId" data-cy="entityId" formControlName="entityId" />
+          @if (entityIdRef.invalid && (entityIdRef.dirty || entityIdRef.touched)) {
+            <div>
+              @if (editForm.get('entityId')?.errors?.required) {
+                <small class="form-text text-danger">Este campo es obligatorio.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('entityId')?.errors?.number"
+                >Este campo debe ser un número.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let fieldNameRef = editForm.get('fieldName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_fieldName">Field Name</label>
+          <input type="text" class="form-control" name="fieldName" id="field_fieldName" data-cy="fieldName" formControlName="fieldName" />
+          @if (fieldNameRef.invalid && (fieldNameRef.dirty || fieldNameRef.touched)) {
+            <div>
+              @if (editForm.get('fieldName')?.errors?.required) {
+                <small class="form-text text-danger">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('fieldName')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 100 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_oldValue">Old Value</label>
+          <textarea class="form-control" name="oldValue" id="field_oldValue" data-cy="oldValue" formControlName="oldValue"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_newValue">New Value</label>
+          <textarea class="form-control" name="newValue" id="field_newValue" data-cy="newValue" formControlName="newValue"></textarea>
+        </div>
+
+        @let usuarioRef = editForm.get('usuario')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_usuario">Usuario</label>
+          <input type="text" class="form-control" name="usuario" id="field_usuario" data-cy="usuario" formControlName="usuario" />
+          @if (usuarioRef.invalid && (usuarioRef.dirty || usuarioRef.touched)) {
+            <div>
+              @if (editForm.get('usuario')?.errors?.required) {
+                <small class="form-text text-danger">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('usuario')?.errors?.maxlength) {
+                <small class="form-text text-danger">Este campo no puede superar más de 100 caracteres.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let fechaModificacionRef = editForm.get('fechaModificacion')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_fechaModificacion">Fecha Modificacion</label>
+          <div class="d-flex">
+            <input
+              id="field_fechaModificacion"
+              data-cy="fechaModificacion"
+              type="datetime-local"
+              class="form-control"
+              name="fechaModificacion"
+              formControlName="fechaModificacion"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (fechaModificacionRef.invalid && (fechaModificacionRef.dirty || fechaModificacionRef.touched)) {
+            <div>
+              @if (editForm.get('fechaModificacion')?.errors?.required) {
+                <small class="form-text text-danger">Este campo es obligatorio.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('fechaModificacion')?.errors?.datetimelocal"
+                >Este campo debe ser una fecha y hora.</small
+              >
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

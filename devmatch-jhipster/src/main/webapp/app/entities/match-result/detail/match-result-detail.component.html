@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (matchResult(); as matchResultRef) {
+      <div>
+        <h2 data-cy="matchResultDetailsHeading"><span>Match Result</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ matchResultRef.id }}</span>
+          </dd>
+          <dt><span>Technical Match</span></dt>
+          <dd>
+            <span>{{ matchResultRef.technicalMatch }}</span>
+          </dd>
+          <dt><span>Ai Technical Affinity</span></dt>
+          <dd>
+            <span>{{ matchResultRef.aiTechnicalAffinity }}</span>
+          </dd>
+          <dt><span>Ai Motivational Affinity</span></dt>
+          <dd>
+            <span>{{ matchResultRef.aiMotivationalAffinity }}</span>
+          </dd>
+          <dt><span>Ai Experience Relevance</span></dt>
+          <dd>
+            <span>{{ matchResultRef.aiExperienceRelevance }}</span>
+          </dd>
+          <dt><span>Ai Comment</span></dt>
+          <dd>
+            <span>{{ matchResultRef.aiComment }}</span>
+          </dd>
+          <dt><span>Created At</span></dt>
+          <dd>
+            <span>{{ matchResultRef.createdAt }}</span>
+          </dd>
+          <dt><span>Project</span></dt>
+          <dd>
+            @if (matchResult()!.project) {
+              <div>
+                <a [routerLink]="['/project', matchResult()!.project?.id, 'view']">{{ matchResultRef.project?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span>Developer</span></dt>
+          <dd>
+            @if (matchResult()!.developer) {
+              <div>
+                <a [routerLink]="['/developer', matchResult()!.developer?.id, 'view']">{{ matchResultRef.developer?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/match-result', matchResultRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

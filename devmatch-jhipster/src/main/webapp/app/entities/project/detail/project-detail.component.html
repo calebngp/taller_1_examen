@@ -1,0 +1,75 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (project(); as projectRef) {
+      <div>
+        <h2 data-cy="projectDetailsHeading"><span>Project</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ projectRef.id }}</span>
+          </dd>
+          <dt><span>Name</span></dt>
+          <dd>
+            <span>{{ projectRef.name }}</span>
+          </dd>
+          <dt><span>Description</span></dt>
+          <dd>
+            <span>{{ projectRef.description }}</span>
+          </dd>
+          <dt><span>Experience Level</span></dt>
+          <dd>
+            <span>{{ projectRef.experienceLevel }}</span>
+          </dd>
+          <dt><span>Project Type</span></dt>
+          <dd>
+            <span>{{ projectRef.projectType }}</span>
+          </dd>
+          <dt><span>Status</span></dt>
+          <dd>
+            <span>{{ projectRef.status }}</span>
+          </dd>
+          <dt><span>Usuario Creacion</span></dt>
+          <dd>
+            <span>{{ projectRef.usuarioCreacion }}</span>
+          </dd>
+          <dt><span>Usuario Modificacion</span></dt>
+          <dd>
+            <span>{{ projectRef.usuarioModificacion }}</span>
+          </dd>
+          <dt><span>Fecha Creacion</span></dt>
+          <dd>
+            <span>{{ projectRef.fechaCreacion | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Fecha Modificacion</span></dt>
+          <dd>
+            <span>{{ projectRef.fechaModificacion | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Required Technologies</span></dt>
+          <dd>
+            @for (requiredTechnologies of projectRef.requiredTechnologies; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/technology', requiredTechnologies.id, 'view']">{{ requiredTechnologies?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/project', projectRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

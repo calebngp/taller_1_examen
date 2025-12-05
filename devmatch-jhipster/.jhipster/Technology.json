@@ -1,0 +1,41 @@
+{
+  "annotations": {
+    "changelogDate": "20251205174200"
+  },
+  "applications": ["devmatch"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "category",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    }
+  ],
+  "name": "Technology",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "developer",
+      "otherEntityRelationshipName": "skills",
+      "relationshipName": "developers",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "project",
+      "otherEntityRelationshipName": "requiredTechnologies",
+      "relationshipName": "projects",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}
